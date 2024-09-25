@@ -93,7 +93,7 @@ async def get_product(product_id) -> Product:
         await session.commit()
         await session.close()
 
-    return product.first()[0] if product.first()[0] is not None else None
+    return product.first()[0] if product.first() is not None else None
 
 
 async def get_products_by_type(type_id) -> list:
