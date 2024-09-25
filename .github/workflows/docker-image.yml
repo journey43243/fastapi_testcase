@@ -19,6 +19,6 @@ jobs:
           - name: run lint
             run : docker exec -i fastapi_testcase-microservice-1 sh -c "poetry run flake8 server tests database"
           - name : run migrations
-            run : docker exec -i fastapi_testcase-microservice-1 sh -c "poetry run alembic upgrade head"
+            run : docker exec -i fastapi_testcase-microservice-1 sh -c "poetry run alembic upgrade 06085bf69bf2"
           - name: run pytest
             run : docker exec -i fastapi_testcase-microservice-1 sh -c "poetry run pytest"
