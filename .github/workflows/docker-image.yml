@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+    docker:
+      runs-on: ubuntu-latest
+      steps:
+          - uses: actions/checkout@v3
+            with:
+              cache: gradle
+          - uses: hoverkraft-tech/compose-action@v2.0.1
+          - name: run poetry
+            run : docker exec -i fastapi_testcase-microservice-1 sh -c "poetry update"
+          - name: run lint
+            run : docker exec -i fastapi_testcase-microservice-1 sh -c "poetry run flake8 server tests database"
+          - name: run pytest
+            run : docker exec -i fastapi_testcase-microservice-1 sh -c "poetry run pytest"
