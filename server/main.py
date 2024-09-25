@@ -42,7 +42,7 @@ async def get_product_per_id(id):
         'id': product.id,
         'name': product.name,
         'product_type': types.get(product.product_type_id)
-    }
+    } if product is not None else None
 
 
 @router.get("/products/type/{type_id}", tags=['product_type'],
