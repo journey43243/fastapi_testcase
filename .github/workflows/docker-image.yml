@@ -16,6 +16,8 @@ jobs:
           - uses: hoverkraft-tech/compose-action@v2.0.1
           - name: run poetry
             run : docker exec -i fastapi_testcase-microservice-1 sh -c "poetry update"
+          - name : repair db
+            run : mkdir -p /var/run/postgresql/.s.PGSQL.5432
           - name: run lint
             run : docker exec -i fastapi_testcase-microservice-1 sh -c "poetry run flake8 server tests database"
           - name: run pytest
